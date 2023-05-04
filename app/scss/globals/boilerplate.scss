@@ -1,0 +1,25 @@
+@use '../util' as *;
+
+html {
+	font-size: 100%;
+	font-family: var(--font-body);
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+body {
+	margin: 0;
+	padding: rem(16) rem(32); // top and bottom padding
+	background-color: hsl(240, 3%, 7%);
+	color: hsl(0, 0%, 100%);
+	display: flex;
+	flex-direction: column; // by default direction is row so it didn't show tiles before this
+	align-items: center; // align items is for verticle elements
+	text-transform: uppercase;
+	font-weight: 600;
+}
