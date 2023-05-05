@@ -60,3 +60,5 @@ exports.wordList = function createWordList() {
 
 // Default Gulp Task 
 exports.default = series(scssTask, jsTask, browserSyncServe, watchTask, createWordList);
+
+exports.build = series(scssTask, jsTask);
