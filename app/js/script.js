@@ -75,7 +75,7 @@ const checkWin = () => {
 		win = true;
 		setTimeout(() => {jumpTiles();}, 300);
 		checkingGuess = false;
-		congratulations();
+		setTimeout(() => {congratulations();}, 600);
 	}
 	else {
 		currentGuessCount++;
