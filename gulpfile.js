@@ -7,7 +7,6 @@ const cssnano = require('cssnano');
 const babel = require('gulp-babel');
 const terser = require('gulp-terser');
 const browsersync = require('browser-sync').create();
-const fs = require('fs');
 
 // Sass Task
 function scssTask() {
@@ -54,11 +53,7 @@ function watchTask() {
 	);
 }
 
-exports.wordList = function createWordList() {
-	fs.readFileSync('5-letter-words.txt', 'utf-8').split('\n');
-}
-
 // Default Gulp Task 
-exports.default = series(scssTask, jsTask, browserSyncServe, watchTask, createWordList);
+exports.default = series(scssTask, jsTask, browserSyncServe, watchTask);
 
 exports.build = series(scssTask, jsTask);
