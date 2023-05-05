@@ -6,9 +6,9 @@
 
 ## Pick a solution word
 
-Store solution words in JSON object / array
-When game is loaded, choose random item from array
-Set solution to word
+x Store solution words in JSON object / array
+x When game is loaded, choose random item from array
+x Set solution to word
 
 ## Making a guess
 
@@ -21,21 +21,17 @@ x if keypress is backspace
         x update tile markup based on "letters"
 
 ## Submit guess
-- compare each letter with the corresponding letter in solution word
-- update the state/color of the letter
+x Enter will submit guess
+x compare each letter with the corresponding letter in solution word
+x update the state/color of the letter
 - If all letters are "correct" / green,  game is won
-
-Don't run update functions if "letters" length = 5
-
-Enter will submit guess
-- 
 
 Guesses must be real word "in word list"
 
 Guess colors (data-state):
-- grey: "absent," letter not in word
-- yellow: "present," letter in word, but in wrong position
-- green: "present," letter in word, in wrong position
+x grey: "absent," letter not in word
+x yellow: "present," letter in word, but in wrong position
+x green: "present," letter in word, in wrong position
 
 Hard Mode: present or correct letters must be used in correct guesses
 
@@ -55,3 +51,5 @@ When typing a letter:
 
 When submitting a guess:
 - Tiles will flip up and and background color will change based on guess
+- Slight delay between each tile flipping
+- Background color changes when tile is flat, i.e. can't see it

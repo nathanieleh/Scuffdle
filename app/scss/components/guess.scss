@@ -5,6 +5,7 @@
     grid-template-columns: repeat(5, 1fr); // evenly spaces children
     gap: rem(3);
     width: rem(300);
+    margin-bottom: rem(10);
 
     &__tile {
         border: rem(2) solid hsl(0, 0%, 26%);
@@ -15,5 +16,24 @@
         align-items: center;
         font-size: rem(32);
         font-weight: 600;
+    }
+
+    .has-letter {
+        border-color: hsl(0, 0%, 40%);
+    }
+
+    .correct {
+        background-color: hsl(115, 29%, 43%);
+        border-color: hsl(115, 29%, 43%);
+    }
+
+    .present {
+        background-color: hsl(49, 51%, 47%);
+        border-color: hsl(49, 51%, 47%);
+    }
+    // classes that come later will override the classes that come before
+    .absent {
+        background-color: hsl(0, 0%, 35%);
+        border-color: hsl(0, 0%, 35%);
     }
 }
