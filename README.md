@@ -1,4 +1,4 @@
-# Wordle Clone
+# Scuffdle
 Attempting to recreate the popular game [Wordle](https://www.nytimes.com/games/wordle/index.html).
 
 Here is my rendition of the [game](https://wordle-clone-26g.pages.dev).
