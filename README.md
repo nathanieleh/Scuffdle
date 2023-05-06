@@ -14,7 +14,7 @@ The rest of the game was done (or planned to be done) by me which includes compo
 This list may be changed in the future, but for now I am planning on doing everything in this list.
 
 ## What is my goal?
-I want to try to replicate as much of the game as possible using skills that I have learned from tutorials and the years of experience I have as a porgrammer.
+I want to try to replicate as much of the game as possible using skills that I have learned from tutorials and the years of experience I have as a programmer.
 Once I feel that I have done a sufficient enough job, I will move on to try and create a website of my own (since that is a much taller task).
 
 ## Anything else?
