@@ -24,7 +24,7 @@ x if keypress is backspace
 x Enter will submit guess
 x compare each letter with the corresponding letter in solution word
 x update the state/color of the letter
-- If all letters are "correct" / green,  game is won
+x If all letters are "correct" / green,  game is won
 
 Guesses must be real word "in word list"
 
@@ -53,3 +53,10 @@ When submitting a guess:
 - Tiles will flip up and and background color will change based on guess
 - Slight delay between each tile flipping
 - Background color changes when tile is flat, i.e. can't see it
+
+## Buttons
+
+There are many native styles that are needed to be overridden in order to style a button the way you want.
+
+https://css-tricks.com/overriding-default-button-styles/
+

@@ -17,3 +17,37 @@ a:visited,
 a:active {
 	text-decoration: none;
 }
+
+button, .button {
+    display: flex;
+	flex-direction: column;
+    width: rem(40);
+    height: rem(58);
+	margin-left: rem(1.5);
+    margin-right: rem(1.5);
+	margin-bottom: rem(1.6);
+	justify-content: center;
+	align-items: center;
+	text-transform: uppercase;
+    background-color: hsl(0, 0%, 57%);
+	color: hsl(0, 0%, 100%);
+    font-size: rem(20);
+    font-weight: bold;
+	border-radius: rem(4);
+
+	&.long-key {
+		width: rem(60);
+		height: rem(58);
+		font-size: rem(10);
+	}
+}
+
+div {
+	display: flex;
+	//grid-auto-flow: column;
+
+	&.blank-key {
+		width: rem(20);
+		height: rem(58);
+	}
+}
