@@ -17,11 +17,7 @@ document.addEventListener('keydown', (e) => {
 	playerMove(keyPress);
 });
 
-// document.querySelectorAll('.normal-key, .long-key').addEventListener('click', (e) => {
-// 	let keypress = e.dataset.key;
-// 	e.dispatchEvent(new KeyboardEvent('keydown', {'key': keypress}));
-// });
-
+// checks if a button is presses, simulates a keypress of the corresponding button if true
 document.querySelectorAll('button').forEach(occurence => {
 	occurence.addEventListener('click', (e) => {
 		let keyPress = e.target.dataset.key;
@@ -43,34 +39,14 @@ const playerMove = (key) => {
 	}
 };
 
-// let guessDone = false;
-// const isGuessComplete = new Promise((resolve, reject) => {
-// 	if (guessDone) {
-// 		resolve();
-// 	}
-// 	else {
-// 		reject();
-// 	}
-// });
-
-// const checkIfGuessComplete = () => {
-// 	isGuessComplete
-// 		.then(() => {
-//             guessDone = true;
-//         });
-// };
-
 const submitGuess = () => {
 	if(wordDict.includes(currentGuess.dataset.letters) || words.includes(currentGuess.dataset.letters)) {
+		updateKeyboard(currentGuess.dataset.letters);
 		checkingGuess = true;
 		for (let i = 0; i < solutionWord.length; i++) {
 			setTimeout(() => {
 				revealTile(i, checkLetter(i));
 			}, i*200);
-			// if(i==4) {
-			// 	guessDone = true;
-			// }
-			// isGuessComplete.then(checkWin());
 		}
 	}
 	else {
@@ -78,11 +54,37 @@ const submitGuess = () => {
 	}
 };
 
+const updateKeyboard = (guess) => {
+	let tempSolutionWord = solutionWord;
+	for(let i=0; i<solutionWord.length; i++) {
+		if(guess[i] == solutionWord[i]) {
+			updateKey(guess[i], 'correct');
+			tempSolutionWord.replace(i,'');
+		}
+		else if(tempSolutionWord.includes(guess[i])) {
+			updateKey(guess[i], 'present');
+			tempSolutionWord.replace(i,'');
+		}
+		else
+			updateKey(guess[i], 'absent');
+	}
+};
+
+const updateKey = (letter, status) => {
+	if(document.getElementById(letter).classList.contains('correct') || document.getElementById(letter).classList.contains('absent')) {
+		return;
+	}
+	else {
+		document.getElementById(letter).classList.remove('present');
+		document.getElementById(letter).classList.add(status);
+	}
+};
+
 const incorrectInput = () => {
 	setTimeout(() => {
         alert('Invalid! Try again.');
     }, 300);
-}
+};
 
 const checkIfGuessComplete = (i) => {
 	if(i==4) {
@@ -117,7 +119,7 @@ const checkWin = () => {
 
 const showSolution = () => {
 	setTimeout(() => {alert('Better luck next time! Solution is: "' + solutionWord + '"');}, 300);
-}
+};
 
 const congratulations = () => {
 	setTimeout(() => {alert('Hooray! You solved it! Reload the page to try again.');}, 300);

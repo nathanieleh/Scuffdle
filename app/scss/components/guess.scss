@@ -23,17 +23,17 @@
     }
 
     .correct {
-        background-color: hsl(115, 29%, 43%);
-        border-color: hsl(115, 29%, 43%);
+        background-color: var(--correct);
+        border-color: var(--correct);
     }
 
     .present {
-        background-color: hsl(49, 51%, 47%);
-        border-color: hsl(49, 51%, 47%);
+        background-color: var(--present);
+        border-color: var(--present);
     }
     // classes that come later will override the classes that come before
     .absent {
-        background-color: hsl(0, 0%, 35%);
-        border-color: hsl(0, 0%, 35%);
+        background-color: var(--absent);
+        border-color: var(--absent);
     }
 }

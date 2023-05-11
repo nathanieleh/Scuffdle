@@ -21,11 +21,6 @@ a:active {
 button, .button {
     display: flex;
 	flex-direction: column;
-    width: rem(40);
-    height: rem(58);
-	margin-left: rem(1.5);
-    margin-right: rem(1.5);
-	margin-bottom: rem(1.6);
 	justify-content: center;
 	align-items: center;
 	text-transform: uppercase;
@@ -34,12 +29,61 @@ button, .button {
     font-size: rem(20);
     font-weight: bold;
 	border-radius: rem(4);
+	@include breakpoint-down(small){
+		width: rem(30);
+    	height: rem(43.5);
+		margin-left: rem(1);
+    	margin-right: rem(1);
+		margin-bottom: rem(1);
+	}
+	@include breakpoint(medium){
+		width: rem(40);
+    	height: rem(58);
+		margin-left: rem(1.5);
+    	margin-right: rem(1.5);
+		margin-bottom: rem(1.6);
+	}
+	@include breakpoint(large){
+		width: rem(40);
+    	height: rem(58);
+		margin-left: rem(1.5);
+    	margin-right: rem(1.5);
+		margin-bottom: rem(1.6);
+	}
 
 	&.long-key {
-		width: rem(60);
-		height: rem(58);
-		font-size: rem(10);
+		
+		@include breakpoint-down(small){
+			width: rem(45);
+			height: rem(43.5);
+			font-size: rem(8);
+		}
+		@include breakpoint(medium){
+			width: rem(60);
+			height: rem(58);
+			font-size: rem(10);
+		}
+		@include breakpoint(large){
+			width: rem(60);
+			height: rem(58);
+			font-size: rem(10);
+		}
 	}
+
+	&.correct {
+        background-color: var(--correct);
+        border-color: var(--correct);
+    }
+
+    &.present {
+        background-color: var(--present);
+        border-color: var(--present);
+    }
+    // classes that come later will override the classes that come before
+    &.absent {
+        background-color: var(--absent);
+        border-color: var(--absent);
+    }
 }
 
 div {
@@ -47,7 +91,18 @@ div {
 	//grid-auto-flow: column;
 
 	&.blank-key {
-		width: rem(20);
-		height: rem(58);
+		
+		@include breakpoint-down(small){
+			width: rem(15);
+			height: rem(43.5);
+		}
+		@include breakpoint(medium){
+			width: rem(20);
+			height: rem(58);
+		}
+		@include breakpoint(large){
+			width: rem(20);
+			height: rem(58);
+		}
 	}
 }
