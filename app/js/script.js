@@ -12,6 +12,7 @@ let wordDict = ["aahed", "aalii", "aargh", "aarti", "abaca", "abaci", "abacs", "
 // let words = createWordList();
 let solutionWord = words[Math.floor(Math.random() * words.length)];
 
+// constantly checks if a key has bee pressed or not
 document.addEventListener('keydown', (e) => {
 	let keyPress = e.key;
 	playerMove(keyPress);
@@ -25,6 +26,7 @@ document.querySelectorAll('button').forEach(occurence => {
 	});
 });
 
+// checks the input of the player and takes actions according to what is pressed
 const playerMove = (key) => {
 	if(currentGuessCount < 7 && !checkingGuess && !win) {
 		if (key.length == 1 && currentGuess.dataset.letters.length < 5) {
@@ -39,13 +41,33 @@ const playerMove = (key) => {
 	}
 };
 
+// starts a set of actions that occur once the enter key is pressed with a valid guess
+// or says the input is incorrect
 const submitGuess = () => {
 	if(wordDict.includes(currentGuess.dataset.letters) || words.includes(currentGuess.dataset.letters)) {
 		updateKeyboard(currentGuess.dataset.letters);
 		checkingGuess = true;
+		let tempSolutionWord = solutionWord;
+		let correctSpaces = [];
+		for(let i = 0; i < solutionWord.length; i++) {
+			if(currentGuess.dataset.letters[i] == solutionWord[i]) {
+				correctSpaces.push(i);
+				tempSolutionWord = tempSolutionWord.replace(currentGuess.dataset.letters[i], '');
+			}
+		}
 		for (let i = 0; i < solutionWord.length; i++) {
+			let guessLetter = currentGuess.dataset.letters[i];
 			setTimeout(() => {
-				revealTile(i, checkLetter(i));
+				if(guessLetter == solutionWord[i] || correctSpaces.includes(i)) {
+					revealTile(i, 'correct');
+					tempSolutionWord = tempSolutionWord.replace(guessLetter,'');
+				}
+				else if(tempSolutionWord.includes(guessLetter)) {
+					revealTile(i, 'present');
+					tempSolutionWord = tempSolutionWord.replace(guessLetter,'');
+				}
+				else
+					revealTile(i, 'absent');
 			}, i*200);
 		}
 	}
@@ -54,28 +76,52 @@ const submitGuess = () => {
 	}
 };
 
+// focuses on a particular tile and flips it with the correct color according to the status
+const revealTile = (i, status) => {
+	let tileNumber = i + 1;
+	flipTile(tileNumber, status);
+	checkIfGuessComplete(i);
+};
+
+// determines the status of the given letter and sends its status to be changed by another method
+const checkLetter = (position) => {
+	let guessedLetter = currentGuess.dataset.letters.charAt(position);
+	let solutionLetter = solutionWord.charAt(position);
+
+	if(guessedLetter == solutionLetter) {
+		return 'correct';
+	}
+	else {
+		// read as "if solutionWord contains letter return present, otherwise return absent"
+		return solutionWord.includes(guessedLetter) ? 'present' : 'absent';
+	}
+};
+
+// updates all the letters used in the guess based on if they are correct, present, or absent
 const updateKeyboard = (guess) => {
 	let tempSolutionWord = solutionWord;
 	for(let i=0; i<solutionWord.length; i++) {
 		if(guess[i] == solutionWord[i]) {
 			updateKey(guess[i], 'correct');
-			tempSolutionWord.replace(i,'');
+			tempSolutionWord = tempSolutionWord.replace(guess[i],'');
 		}
 		else if(tempSolutionWord.includes(guess[i])) {
 			updateKey(guess[i], 'present');
-			tempSolutionWord.replace(i,'');
+			tempSolutionWord = tempSolutionWord.replace(guess[i],'');
 		}
 		else
 			updateKey(guess[i], 'absent');
 	}
 };
 
+// changes html code to update the background color of the key
 const updateKey = (letter, status) => {
-	if(document.getElementById(letter).classList.contains('correct') || document.getElementById(letter).classList.contains('absent')) {
+	if(document.getElementById(letter).classList.contains('correct')) {
 		return;
 	}
 	else {
 		document.getElementById(letter).classList.remove('present');
+		document.getElementById(letter).classList.remove('absent');
 		document.getElementById(letter).classList.add(status);
 	}
 };
@@ -92,6 +138,7 @@ const checkIfGuessComplete = (i) => {
 	}
 };
 
+// causes an animation to play when the user gets the correct guess
 const jumpTiles = () => {
 	for(let i = 1; i <= solutionWord.length; i++) {
 		setTimeout(() => {
@@ -101,6 +148,7 @@ const jumpTiles = () => {
 	}
 };
 
+// updates the win variable to reflect if the game is over or not
 const checkWin = () => {
 	if(solutionWord == currentGuess.dataset.letters.toLowerCase()) {
 		win = true;
@@ -125,6 +173,7 @@ const congratulations = () => {
 	setTimeout(() => {alert('Hooray! You solved it! Reload the page to try again.');}, 300);
 }
 
+// updates the global variables for the guess based on user input
 const updateLetters = (letter) => {
 	let oldLetters = currentGuess.dataset.letters;
 	let newLetters = oldLetters + letter;
@@ -133,12 +182,14 @@ const updateLetters = (letter) => {
 	updateTiles(currentTile, letter);
 };
 
+// updates the tile to show that there is a letter that was input into the game
 const updateTiles = (tileNumber, letter) => {
 	let currentTile = document.querySelector('#guess' + currentGuessCount + 'Tile' + tileNumber);
 	currentTile.innerText = letter; // innerHTML is not secured
 	currentTile.classList.add('has-letter');
 };
 
+// updates the global guess variable and calls the method to change values in the html file when the delete button is clicked
 const deleteFromLetters = () => {
 	let oldLetters = currentGuess.dataset.letters;
 	let newLetters = oldLetters.slice(0, -1); // removes last character
@@ -146,32 +197,18 @@ const deleteFromLetters = () => {
 	deleteFromTiles(oldLetters.length);
 };
 
+// deletes the given tile based on how many letters are left in the html file
 const deleteFromTiles = (tileNumber) => {
 	let currentTile = document.querySelector('#guess' + currentGuessCount + 'Tile' + tileNumber);
 	currentTile.innerText = '';
 	currentTile.classList.remove('has-letter');
 };
 
-const checkLetter = (position) => {
-	let guessedLetter = currentGuess.dataset.letters.charAt(position);
-	let solutionLetter = solutionWord.charAt(position);
 
-	if(guessedLetter == solutionLetter) {
-		return 'correct';
-	}
-	else {
-		// read as "if solutionWord contains letter return present, otherwise return absent"
-		return solutionWord.includes(guessedLetter) ? 'present' : 'absent';
-	}
-};
 
-const revealTile = (i, status) => {
-	let tileNumber = i + 1;
-	let tile = document.querySelector('#guess' + currentGuessCount + 'Tile' + tileNumber);
-	flipTile(tileNumber, status);
-	checkIfGuessComplete(i);
-};
 
+
+// shows if the current tile is correct, present, or absent
 const flipTile = (tileNumber, status) => {
 	let tile = document.querySelector('#guess' + currentGuessCount + 'Tile' + tileNumber);
 	tile.classList.add('flip-in');
