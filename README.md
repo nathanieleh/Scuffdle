@@ -7,10 +7,9 @@ Here is my rendition of the [game](https://wordle-clone-26g.pages.dev).
 A large start to this project was done with the help of a tutorial made by [CoderCoder](https://www.youtube.com/@TheCoderCoder) where she helped with the basic functionality of the game itself and the aesthetic of the game. <ins>**A majority of my own programming went into the javascript file.**</ins>
 
 The rest of the game was done (or planned to be done) by me which includes components such as:
-* An in-game keyboard for mobile functionality
-* Checking if the input is actually a word
-* Creating a list of words that can be included as solutions to the game
-* A light/dark mode
+* ~An in-game keyboard for mobile functionality~
+* ~Checking if the input is actually a word~
+* ~Creating a list of words that can be included as solutions to the game~
 
 This list may be changed in the future, but for now I am planning on doing everything in this list.
 
