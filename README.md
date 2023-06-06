@@ -4,7 +4,7 @@ Attempting to recreate the popular game [Wordle](https://www.nytimes.com/games/w
 Here is my rendition of the [game](https://wordle-clone-26g.pages.dev).
 
 ## How I made the site
-A large start to this project was done with the help of a tutorial made by [CoderCoder](https://www.youtube.com/@TheCoderCoder) where she helped with the basic functionality of the game itself and the asthetic of the game.
+A large start to this project was done with the help of a tutorial made by [CoderCoder](https://www.youtube.com/@TheCoderCoder) where she helped with the basic functionality of the game itself and the aesthetic of the game.
 
 The rest of the game was done (or planned to be done) by me which includes components such as:
 * An in-game keyboard for mobile functionality
